@@ -3,16 +3,16 @@ import profile from "../assets/profile.jpg"
 
 const Navbar = () => {
   return (
-    <div className='w-full py-[0.5rem] bg-white shadow-sm'>
-      <section className='w-[90%] mx-auto flex justify-between items-center gap-[2rem]'>
-        <h2 className='care text-[1.8rem] font-medium text-[#0DD983]'>Syst</h2>
-        <div className='w-[300px] h-[40px] border rounded-[2rem] flex justify-center items-center gap-[0.5rem]'>
+    <div className='w-full py-[0.5rem] bg-white shadow-sm border-b border-gray-100 z-[99]'>
+      <section className='maxContainer w-[90%] mx-auto flex justify-between items-center gap-[2rem]'>
+        <h2 className='care md:text-[1.8rem] text-[1.6rem] font-medium text-[#0DD983]'>Syst</h2>
+        <div className='lg:w-[300px] sm:w-[200px] h-[40px] sm:border rounded-[2rem] flex justify-center items-center gap-[0.5rem]'>
             <div className='text-gray-400 '>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                 </svg>
             </div>
-            <input type="text" className='outline-none text-[0.8rem] leading-[0.1rem] border-none' placeholder='Search' />
+            <input type="text" className='sm:block hidden outline-none text-[0.8rem] leading-[0.1rem] border-none' placeholder='Search' />
         </div>
 
         <div className='pops flex justify-end items-center gap-[0.8rem] '>

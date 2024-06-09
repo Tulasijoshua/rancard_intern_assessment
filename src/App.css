@@ -15,6 +15,11 @@ body {
   margin: 0 auto;
 }
 
+.maxSection {
+  max-width: 80rem;
+  margin: 0 auto;
+}
+
 .auth-img {
   background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)), url("./assets/auth_back.jpg");
   background-position: center;
@@ -29,10 +34,39 @@ body {
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Uncut-Sans-VF';
+  src: url('./fonts/Uncut-Sans-VF.ttf') format('truetype');
+  /* font-weight: normal; */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HKGrotesk-Regular';
+  src: url('./fonts/HKGrotesk-Regular.otf') format('truetype');
+  /* font-weight: normal; */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'HKGrotesk-Medium';
+  src: url('./fonts/HKGrotesk-Medium.otf') format('truetype');
+  /* font-weight: normal; */
+  font-style: normal;
+}
+
 .care {
   font-family: 'Carena-Regular', sans-serif;
 }
 
 .pops {
   font-family: 'Poppins', sans-serif;
+}
+
+.grotest {
+  font-family: 'HKGrotesk-Regular', sans-serif;
+}
+
+.grotest-medium {
+  font-family: 'HKGrotesk-Medium', sans-serif;
 }

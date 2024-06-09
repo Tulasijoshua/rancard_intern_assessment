@@ -6,7 +6,7 @@ const Wrapper = ({Page}) => {
   return (
     <div className='w-full h-full overflow-hidden bg-[#F5F5F5]'>
       <Navbar />
-      <div className='w-full flex justify-between gap-[1rem]'>
+      <div className='w-full h-full flex justify-between sm:gap-[1rem] gap-[0.5rem]'>
         <Sidebar />
         <div className='grow overflow-auto'>
             {Page}

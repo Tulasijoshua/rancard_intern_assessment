@@ -27,6 +27,11 @@ body {
   background-repeat: no-repeat;
 }
 
+.active {
+  background-color: #0DD983;
+  color: #fff;
+}
+
 @font-face {
   font-family: 'Carena-Regular';
   src: url('./fonts/Carena-Regular.otf') format('truetype');
@@ -37,6 +42,13 @@ body {
 @font-face {
   font-family: 'Uncut-Sans-VF';
   src: url('./fonts/Uncut-Sans-VF.ttf') format('truetype');
+  /* font-weight: normal; */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Uncut-Sans-Regular';
+  src: url('./fonts/Uncut-Sans-Regular.otf') format('truetype');
   /* font-weight: normal; */
   font-style: normal;
 }
@@ -61,6 +73,14 @@ body {
 
 .pops {
   font-family: 'Poppins', sans-serif;
+}
+
+.uncut {
+  font-family: 'Uncut-Sans-VF', sans-serif;
+}
+
+.uncut-regular {
+  font-family: 'Uncut-Sans-Regular', sans-serif;
 }
 
 .grotest {

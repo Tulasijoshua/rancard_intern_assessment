@@ -1,9 +1,13 @@
 import React from 'react'
+import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { signOut } from '../store/authSlice';
 
 const Sidebar = () => {
+    const dispatch = useDispatch();
+
   return (
-    <div className='uncut xl:w-[300px] lg:w-[250px] w-fit h-full lg:px-0 px-[0.5rem] bg-white'>
+    <div className='uncut xl:w-[300px] lg:w-[250px] w-fit h-full pb-[4.5rem] flex flex-col justify-between lg:px-0 px-[0.5rem] bg-white'>
       <div className='xl:w-[80%] w-[90%] mx-auto py-[3rem] text-[#8F8F8F] flex flex-col lg:items-start items-center gap-[1rem]'>
         <NavLink to="/" className='w-full py-[0.6rem] px-[1rem] flex justify-start items-center gap-[1rem] rounded-lg cursor-pointer'>
             <div>
@@ -38,6 +42,12 @@ const Sidebar = () => {
             </div>
             <small className='lg:block hidden text-[1rem] font-medium'>Report</small>
         </NavLink>
+      </div>
+      <div onClick={() => dispatch(signOut())} className='w-[90%] mx-auto py-[0.5rem] border-2 border-red-200 flex justify-center items-center gap-[1rem] text-red-200 rounded-xl hover:border-none hover:bg-red-500 hover:text-white transition-all cursor-pointer'>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+        </svg>
+        <button className='text-[1rem] font-semibold'>Logout</button>
       </div>
     </div>
   )

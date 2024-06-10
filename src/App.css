@@ -10,6 +10,10 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 .maxContainer {
   max-width: 100rem;
   margin: 0 auto;

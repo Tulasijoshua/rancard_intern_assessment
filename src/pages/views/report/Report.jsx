@@ -1,4 +1,7 @@
 import React from 'react'
+import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { chartData } from '../../../utils/products';
+
 
 const Report = () => {
   return (
@@ -12,7 +15,7 @@ const Report = () => {
                 </svg>
             </button>
         </div>
-        <div className='uncut w-full pt-[1.5rem] grid grid-cols-4 gap-[2rem]'>
+        <div className='uncut w-full pt-[1.5rem] pb-[3rem] grid grid-cols-4 gap-[2rem]'>
             <div className='w-full py-[2rem] px-[1.5rem] bg-white rounded-md'>
                 <div className='pb-[1rem] flex justify-start items-center gap-[1rem] border-b'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
@@ -59,6 +62,30 @@ const Report = () => {
                 </div>
             </div>
         </div>
+
+        <section className='uncut w-full h-[600px] px-[4rem] py-[2rem] bg-white'>
+            <ResponsiveContainer width="100%" height="100%">
+                <BarChart
+                width={500}
+                height={300}
+                data={chartData}
+                margin={{
+                    top: 5,
+                    right: 30,
+                    left: 20,
+                    bottom: 5,
+                }}
+                >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
+                {/* <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} /> */}
+                </BarChart>
+            </ResponsiveContainer>
+        </section>
     </section>
   )
 }

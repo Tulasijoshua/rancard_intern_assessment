@@ -1,14 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { products } from '../../../utils/products'
+import Modal from '../../../common/Modal'
+import AddToCart from '../cart/AddToCart'
+import Button from '../../../common/Button'
+import AddProduct from '../products/AddProduct'
 
 const Home = () => {
+    const [showCart, setShowCart] = useState(false)
+    const [showProduct, setShowProduct] = useState(false)
+    const [isBack, setIsBack] = useState(false);
+
   return (
     <section className='maxSection w-full lg:px-[2rem] px-[1rem] sm:py-[3rem] py-[1.5rem]'>
+        <Modal isOn={showCart} name="Add to Cart" onClose="Close" setIsBack={false} close={()=>setShowCart(false)} content={<AddToCart close={()=>{
+                setShowCart(false)
+            }} cancel={()=>setShowCart(false)}/>}
+        />
+        <Modal isOn={showProduct} name="Add Product" onClose="Back" isBack={isBack} setIsBack={setIsBack} close={()=>setShowProduct(false)} content={<AddProduct close={()=>{
+                setShowProduct(false)
+            }} cancel={()=>setShowProduct(false)}/>}
+        />
       <div className='w-full flex sm:flex-row flex-col xs:justify-between justify-start sm:items-center items-start'>
         <h2 className='uncut text-left 2xl:text-[2rem] xl:text-[1.8rem] md:text-[1.6rem] text-[1.5rem] font-semibold'>Products</h2>
         <div className='grotest-medium sm:pt-[0.5rem] pt-[1rem] flex ss:flex-row flex-col ss:justify-end justify-start items-center gap-[1rem]'>
-            <button className='xl:px-[1.8rem] xs:px-[1.5rem] px-[1rem] xl:py-[0.8rem] py-[0.5rem] md:text-[0.9rem] text-[0.8rem] text-[#0DD983] font-medium border border-[#0DD983] rounded-[2rem]'>Add Product</button>
-            <button className='xl:px-[1.8rem] xs:px-[1.5rem] px-[1rem] xl:py-[0.8rem] py-[0.5rem] md:text-[0.9rem] text-[0.8rem] text-white font-medium border bg-[#0DD983] rounded-[2rem]'>Add to Cart</button>
+            <button onClick={()=>{setShowProduct(true); setIsBack(true)}} className='xl:px-[1.8rem] xs:px-[1.5rem] px-[1rem] xl:py-[0.8rem] py-[0.5rem] md:text-[0.9rem] text-[0.8rem] text-[#0DD983] font-medium border border-[#0DD983] rounded-[2rem]'>Add Product</button>
+            <Button onClick={()=>setShowCart(true)} title="Add to Cart" />
         </div>
       </div>
         <section className='w-full py-[1.5rem] grid md:grid-cols-3 xs:grid-cols-2  2xl:gap-[2.5rem] lg:gap-[2rem] gap-[1rem]'>

@@ -3,11 +3,11 @@ import { Route, Routes, useLocation } from 'react-router-dom'
 import Wrapper from '../components/Wrapper'
 import Home from '../pages/views/home/Home'
 import Login from '../pages/auth/Login'
-import ProductsPage from '../pages/views/products/ProductsPage'
 import OrderPage from '../pages/views/order/OrderPage'
 import Report from '../pages/views/report/Report'
 import Register from '../pages/auth/Register'
 import { useSelector } from 'react-redux'
+import ProductsPage from '../pages/views/products/ProductsPage'
 
 const Router = () => {
     const location = useLocation();

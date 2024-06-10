@@ -36,6 +36,17 @@ body {
   color: #fff;
 }
 
+.custom-radio {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+}
+
+.custom-radio:checked {
+  background-color: #0DD983;
+}
+
 @font-face {
   font-family: 'Carena-Regular';
   src: url('./fonts/Carena-Regular.otf') format('truetype');
@@ -94,3 +105,4 @@ body {
 .grotest-medium {
   font-family: 'HKGrotesk-Medium', sans-serif;
 }
+

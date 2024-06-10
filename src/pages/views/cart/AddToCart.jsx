@@ -1,8 +1,13 @@
 import React from 'react'
 import prod from "../../../assets/products/pizza.jpg";
 import Button from '../../../common/Button';
+import { useDispatch, useSelector } from 'react-redux';
 
 const AddToCart = () => {
+    const dispatch = useDispatch();
+
+    const items = useSelector((state) => state.cart.items);
+    console.log(items)
   return (
     <div className='w-full h-[95%] flex flex-col justify-between items-start overflow-hidden'>
         <div className='w-full lg:px-[2rem] px-[1rem]'>

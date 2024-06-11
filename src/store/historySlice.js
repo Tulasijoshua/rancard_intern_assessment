@@ -1,5 +1,4 @@
 // historySlice.js
-
 import { createSlice } from '@reduxjs/toolkit';
 
 // Load history from local storage if available
@@ -24,9 +23,12 @@ export const historySlice = createSlice({
       state.history = [];
       localStorage.removeItem('history');
     },
+    loadHistoryFromLocalStorage: (state) => {
+      state.history = loadHistoryFromStorage();
+    }
   },
 });
 
-export const { addToHistory, clearHistory } = historySlice.actions;
+export const { addToHistory, clearHistory, loadHistoryFromLocalStorage } = historySlice.actions;
 
 export default historySlice.reducer;

@@ -13,14 +13,14 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     register: (state, action) => {
-      const { username, password } = action.payload;
-      const newUser = { username, password };
+      const { username, email, password } = action.payload;
+      const newUser = { username, email, password };
       const users = JSON.parse(localStorage.getItem('users')) || [];
       users.push(newUser);
       localStorage.setItem('users', JSON.stringify(users));
     },
     signIn: (state, action) => {
-      const { username, password } = action.payload;
+      const { username, email, password } = action.payload;
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const user = users.find((u) => u.username === username);
 

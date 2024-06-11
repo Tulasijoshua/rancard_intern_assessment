@@ -35,13 +35,8 @@ const Home = () => {
     console.log(products)
 
     const handleAddToCart = (product) => {
-        // if (!selectedProduct) {
-        //     setAlert({...isAlert, status: true, text: "Select a product!", type: 'error'})
-        // } else {
             setSelectedProduct(product);
             setShowCart(true);
-
-        // }
     };
 
 
@@ -100,7 +95,7 @@ const Home = () => {
                         }
                     </section>
                 </>) : (<>
-                    <div className='w-full flex flex-col justify-center items-center pt-[4rem]'><Empty text={'No loans yet'}/></div>
+                    <div className='w-full flex flex-col justify-center items-center pt-[4rem]'><Empty text={'No product available'}/></div>
                 </>)
             }
     </section>

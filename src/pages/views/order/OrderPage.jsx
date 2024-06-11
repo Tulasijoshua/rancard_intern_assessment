@@ -1,10 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { orderedProd, prodHistory } from '../../../utils/products'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadHistoryFromLocalStorage } from '../../../store/historySlice';
 
 const OrderPage = () => {
-    const historyItems = useSelector((state) => state?.history?.history);
-    console.log("Product history", historyItems);
+    const dispatch = useDispatch();
+
+    const history = useSelector((state) => state.history?.history);
+
+    useEffect(() => {
+      // Load history from local storage when the component mounts
+      dispatch(loadHistoryFromLocalStorage());
+    }, [dispatch]);
+
+  console.log("History ", loadHistoryFromLocalStorage)
+
   return (
     <section className='maxSection w-full lg:px-[2rem] px-[1rem] sm:py-[3rem] py-[1.5rem]'>
         <div className='w-full flex justify-between items-center gap-[1rem]'>

@@ -4,10 +4,21 @@ import Button from '../../../common/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../../store/cartSlice';
 import Empty from '../../../common/Empty';
+import Alert from '../../../common/Alert';
 
 const AddToCart = ({product}) => {
     const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
+  const [isAlert, setAlert] = useState({
+    status: false,
+    text: '',
+    bigText: '',
+    type: '',
+    button: '',
+    action: ()=>{},
+    button1: '',
+    action1: ()=>{},
+})
 
   const handleIncrement = () => {
     setQuantity(quantity + 1);
@@ -20,14 +31,16 @@ const AddToCart = ({product}) => {
   };
 
   const handleAddToCart = () => {
-    // Dispatch the addItem action with the selected product and quantity
     dispatch(addItem({ product, quantity }));
+    setAlert({...isAlert, status: true, text:"Added successfully!", type: 'success'})
   };
 
   return (
     <div className='w-full h-[95%] flex flex-col justify-between items-start overflow-hidden'>
+            <Alert big={isAlert.bigText} button1={isAlert.button} action1={()=>isAlert.action()} isON={isAlert.status} type={isAlert.type} message={isAlert.text} setON={(val)=>setAlert({...isAlert, status: false, text: ''})}/>
+
             {!product ? (<>
-                <div className='w-full flex flex-col justify-center items-center pt-[4rem]'><Empty text={'No loans yet'}/></div>
+                <div className='w-full flex flex-col justify-center items-center pt-[4rem]'><Empty text={'Cart is empty'}/></div>
                 </>) : (<>
             <div className='w-full lg:px-[2rem] px-[1rem]'>
 
@@ -70,7 +83,7 @@ const AddToCart = ({product}) => {
         <div className='w-full py-[1rem] flex justify-between items-center border-t-[1px] border-gray-400'>
             <div className='pl-[2rem] flex flex-col justify-center items-center'>
                 <p className='text-[0.9rem] text-gray-600'>Total</p>
-                <p className='sm:text-[1.2rem] text-[1rem] font-semibold'>0</p>
+                <p className='sm:text-[1.2rem] text-[1rem] font-semibold'>{quantity}</p>
             </div>
             <div className='pr-[2rem]'>
                 <Button onClick={handleAddToCart}  title="Add to Cart" />

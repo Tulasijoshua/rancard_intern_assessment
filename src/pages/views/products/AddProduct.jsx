@@ -74,7 +74,11 @@ const AddProduct = () => {
 
     const handleProduct = (e) => {
         e.preventDefault();
-        dispatch(addProduct(state));
+        const variantsWithNumericPrice = state.variants.map(variant => ({
+            ...variant,
+            price: parseFloat(variant.price)
+        }));
+        dispatch(addProduct({...state, variants: variantsWithNumericPrice}));
         setState({
             image: "",
             productName: "",

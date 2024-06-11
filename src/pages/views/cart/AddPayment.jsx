@@ -1,22 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Button from '../../../common/Button'
 import ghana from "../../../assets/countries/images.png";
 import ukFlag from "../../../assets/countries/uk.png";
 import usFlag from "../../../assets/countries/us.jpg";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToHistory } from '../../../store/historySlice';
+import { loadCart } from '../../../store/cartSlice';
 
 const AddPayment = () => {
     const [isDelivery, setIsDelivery] = useState(false)
     const [isPickup, setIsPickup] = useState(false)
+    const dispatch = useDispatch();
+    
 
-    const cartItems = useSelector(state => state.cart.items);
+    const cartItems = useSelector((state) => state.cart.items);
+    useEffect(() => {
+        dispatch(loadCart());
+      }, [dispatch]);
 
-    const handleCheckout = () => {
-        dispatch(addToHistory(cartItems));
-        // Optionally, clear cart items after checkout
-        // dispatch(clearCart());
-      };
+  const handleCheckout = () => {
+    // Dispatch action to add current cart items to history
+    dispatch(addToHistory(cartItems));
+  };
 
   return (
     <div className='grotest w-full mx-auto px-[2rem] py-[1rem]'>

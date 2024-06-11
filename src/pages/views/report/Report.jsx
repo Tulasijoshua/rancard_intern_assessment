@@ -4,19 +4,21 @@ import { chartData } from '../../../utils/products';
 import Button from '../../../common/Button';
 import { Chart as ChartJS } from "chart.js/auto";
 import { Doughnut, Bar } from 'react-chartjs-2';
-import { loadCart } from '../../../store/cartSlice';
+import { loadCart, selectTotalPrice } from '../../../store/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 
 const Report = () => {
     const dispatch = useDispatch();
     const cartItems = useSelector(state => state.cart.items);
+    const totalPrice = useSelector(selectTotalPrice);
 
     useEffect(() => {
         dispatch(loadCart());
       }, [dispatch]);
 
       console.log(cartItems)
+      console.log(totalPrice)
 
 
 
@@ -49,7 +51,7 @@ const Report = () => {
                     <small className='text-[1rem] font-semibold'>Total Orders</small>
                 </div>
                 <div className='pt-[2.5rem]'>
-                    <h2 className='text-[1.3rem] font-bold'>50</h2>
+                    <h2 className='text-[1.3rem] font-bold'>{cartItems.length}</h2>
                 </div>
             </div>
             <div className='w-full max-w-[300px] xl:h-[190px] sm:h-[170px] h-[190px] flex flex-col justify-between py-[1.7rem] xl:px-[1.5rem] px-[1rem] bg-white rounded-md'>
@@ -83,7 +85,7 @@ const Report = () => {
                     <small className='text-[1rem] font-semibold'>Sales</small>
                 </div>
                 <div className='pt-[2.5rem]'>
-                    <h2 className='xl:text-[1.3rem] text-[1.1rem] font-bold'>GHS 4,450</h2>
+                    <h2 className='xl:text-[1.3rem] text-[1.1rem] font-bold'>GHS {totalPrice}</h2>
                 </div>
             </div>
         </div>

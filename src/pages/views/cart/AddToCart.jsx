@@ -68,9 +68,9 @@ const AddToCart = ({product}) => {
                                     <small className='w-[20%] 2xl:text-[1rem] text-[0.9rem] font-semibold'>{variant.size}</small>
                                     <small className='w-[20%] 2xl:text-[1rem] text-[0.9rem] font-semibold'>GHS {variant.price}</small>
                                     <div className='flex-1 flex justify-end items-center gap-[1rem]'>
-                                        <div onClick={handleIncrement} className='2xl:leading-[1.5rem] leading-[1.2rem] 2xl:px-[1rem] px-[0.8rem] lg:text-[1rem] sm:text-[0.9rem] text-[0.8rem] font-bold rounded-xl border border-gray-400 bg-[#DFDFDF]'>+</div>
+                                        <div onClick={handleIncrement} className='cursor-pointer 2xl:leading-[1.5rem] leading-[1.2rem] 2xl:px-[1rem] px-[0.8rem] lg:text-[1rem] sm:text-[0.9rem] text-[0.8rem] font-bold rounded-xl border border-gray-400 bg-[#DFDFDF]'>+</div>
                                         <div className='2xl:text-[1rem] text-[0.9rem] 2xl:px-[0.6rem] px-[0.4rem] 2xl:py-[0.5rem] py-[0.3rem] border-2 leading-[0.6rem]'>{quantity}</div>
-                                        <div onClick={handleDecrement} className='2xl:leading-[1.5rem] leading-[1.2rem] 2xl:px-[1rem] px-[0.8rem] lg:text-[1rem] sm:text-[0.9rem] text-[0.8rem] font-bold rounded-xl border border-gray-400 bg-[#DFDFDF]'>-</div>
+                                        <div onClick={handleDecrement} className='cursor-pointer 2xl:leading-[1.5rem] leading-[1.2rem] 2xl:px-[1rem] px-[0.8rem] lg:text-[1rem] sm:text-[0.9rem] text-[0.8rem] font-bold rounded-xl border border-gray-400 bg-[#DFDFDF]'>-</div>
                                     </div>
                                 </div>
                         ))

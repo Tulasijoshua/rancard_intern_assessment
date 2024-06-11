@@ -46,6 +46,8 @@ const AddPayment = () => {
                 phoneNumber
             };
             dispatch(addToHistory({ items: cartItems, userDetails }));
+            setAlert({...isAlert, status: true, text:"Order successful!", type: 'success'})
+
         } else {
             setAlert({...isAlert, status: true, text: "Product deleted!", type: 'error'})
         }
@@ -55,18 +57,18 @@ const AddPayment = () => {
     <div className='grotest w-full mx-auto px-[2rem] py-[1rem]'>
         <Alert big={isAlert.bigText} button1={isAlert.button} action1={()=>isAlert.action()} isON={isAlert.status} type={isAlert.type} message={isAlert.text} setON={(val)=>setAlert({...isAlert, status: false, text: ''})}/>
         <h2 className='text-[1.1rem] font-semibold'>Product details</h2>
-        <div className='w-full h-[500px] py-[0.5rem] overflow-auto'>
-            <div className='w-[60%]'>
-                <div className='flex flex-col gap-[0.5rem] pb-[1rem]'>
+        <div className='w-full max-h-[65vh] py-[0.5rem] overflow-auto'>
+            <div className=''>
+                <div className='sm:w-[60%] xs:w-[80%] flex flex-col gap-[0.5rem] pb-[1rem]'>
                     <label className='text-[1rem] font-medium'>Name</label>
-                    <input className='outline-none border-2 text-[0.9rem] px-[1rem] py-[0.5rem] rounded-md' type="text" 
+                    <input required className='outline-none border-2 text-[0.9rem] px-[1rem] py-[0.5rem] rounded-md' type="text" 
                         placeholder='Kwame  Dartey'
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
                 </div>
-                <div className='flex flex-col gap-[0.5rem] pb-[1rem]'>
-                    <label className='text-[1rem] font-medium'>Phone number</label>
+                <div className='sm:w-[60%] xs:w-[80%] flex flex-col gap-[0.5rem] pb-[1rem]'>
+                    <label required className='text-[1rem] font-medium'>Phone number</label>
                     <div className='h-[40px] bg-gray-300 flex justify-start items-center border-2 rounded-md'>
                         <div className=' flex justify-start items-center gap-[0.5rem] '>
                             <div className='w-[30px] h-full'>
@@ -86,7 +88,7 @@ const AddPayment = () => {
                 </div>
                 <div className='pt-[0.4rem]'>
                     <div className='text-[1.1rem] font-semibold'>Select Payment method</div>
-                    <div className='py-[0.5rem] flex justify-start items-center gap-[2rem]'>
+                    <div className='py-[0.5rem] flex justify-start items-center sm:gap-[2rem] gap-[0.5rem] flex-wrap'>
                         <div className='flex justify-start items-center gap-[1rem]'>
                             <input type="radio" className=" accent-[#0DD983] " 
                                 name="paymentMethod"
@@ -131,7 +133,7 @@ const AddPayment = () => {
                     <small className='text-[0.8rem] font-semibold'>Select delivery option</small>
                     <div className='pt-[0.5rem] flex justify-start items-center gap-[1rem]'>
                         <div onClick={() => {setIsDelivery(true); setIsPickup(false)}} className={`text-[0.9rem] px-[1rem] py-[0.4rem] border ${isDelivery ? 'bg-[#069B5C] text-white' : 'text-black'} rounded-md`}>Delivery</div>
-                        <div onClick={() => {setIsDelivery(false); setIsPickup(true)}} className={`text-[0.9rem] px-[1rem] py-[0.4rem] border ${isDelivery ? 'bg-[#069B5C] text-white' : 'text-black'} rounded-md`}>Pick up</div>
+                        <div onClick={() => {setIsDelivery(false); setIsPickup(true)}} className={`text-[0.9rem] px-[1rem] py-[0.4rem] border ${!isDelivery ? 'bg-[#069B5C] text-white' : 'text-black'} rounded-md`}>Pick up</div>
                     </div>
                 </div>
                 <div className='w-full px-[1.5rem] py-[1rem] bg-[#FFDEB642] flex justify-between items-center gap-[2rem]'>

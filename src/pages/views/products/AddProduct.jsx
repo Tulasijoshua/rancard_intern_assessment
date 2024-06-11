@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { addProduct } from '../../../store/productSlice';
 import ImageCompressor from 'image-compressor.js';
 import { v4 as uuidv4 } from 'uuid';
+import Alert from '../../../common/Alert';
 
 
 
@@ -11,6 +12,16 @@ const AddProduct = () => {
     const [profileImg, setProfileImg] = useState('')
     const dispatch = useDispatch();
     const [variants, setVariants] = useState([{ id: 1, name: '', price: 0, size: '' }]);
+    const [isAlert, setAlert] = useState({
+        status: false,
+        text: '',
+        bigText: '',
+        type: '',
+        button: '',
+        action: ()=>{},
+        button1: '',
+        action1: ()=>{},
+    })
     const [state, setState] = useState({
         id: uuidv4(),
         image: "",
@@ -19,6 +30,7 @@ const AddProduct = () => {
         description: "",
         variants: [{ id: 1, name: '', price: 0, size: '' }],
     });
+
 
     const fileChange = (e) => {
         const file = e.target.files[0];
@@ -79,6 +91,8 @@ const AddProduct = () => {
             price: parseFloat(variant.price)
         }));
         dispatch(addProduct({...state, variants: variantsWithNumericPrice}));
+        setAlert({...isAlert, status: true, text:"Product added successfully!", type: 'success'})
+
         setState({
             image: "",
             productName: "",
@@ -91,8 +105,9 @@ const AddProduct = () => {
 
   return (
     <form onSubmit={handleProduct} className='grotest w-full mx-auto px-[2rem] py-[1rem]'>
+        <Alert big={isAlert.bigText} button1={isAlert.button} action1={()=>isAlert.action()} isON={isAlert.status} type={isAlert.type} message={isAlert.text} setON={(val)=>setAlert({...isAlert, status: false, text: ''})}/>
       <h2 className='text-[1.1rem] font-semibold'>Product details</h2>
-      <div className='w-fit h-[73vh] py-[0.5rem] overflow-auto'>
+      <div className='w-fit h-[65vh] py-[0.5rem] overflow-auto'>
         <div className='w-fit h-fit pb-[1rem]'>
             <small className='text-[1rem] font-medium'>Image</small>
             <div className='max-w-[300px] w-fit mt-[0.5rem] flex flex-col justify-center items-center relative px-3 py-2 border-2 border-dashed border-gray-200 rounded-lg '>

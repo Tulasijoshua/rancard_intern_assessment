@@ -10,5 +10,5 @@ export const selectTotalItems = createSelector(
 
 export const selectTotalPrice = createSelector(
     [selectCartItems],
-    (items) => items.reduce((total, item) => total + parseFloat(item.price) * item.quantity, 0)
+    (items) => items.reduce((total, item) => total + item.variants[0].price * item.quantity, 0)
 );

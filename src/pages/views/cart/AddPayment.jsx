@@ -6,11 +6,27 @@ import usFlag from "../../../assets/countries/us.jpg";
 import { useDispatch, useSelector } from 'react-redux';
 import { addToHistory } from '../../../store/historySlice';
 import { loadCart } from '../../../store/cartSlice';
+import Alert from '../../../common/Alert';
 
 const AddPayment = () => {
     const [isDelivery, setIsDelivery] = useState(false)
     const [isPickup, setIsPickup] = useState(false)
+    const [isMomoSameAsPhone, setIsMomoSameAsPhone] = useState(false);
+    const [momoNumber, setMomoNumber] = useState('');
+    const [paymentMethod, setPaymentMethod] = useState('momo');
+    const [name, setName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const dispatch = useDispatch();
+    const [isAlert, setAlert] = useState({
+        status: false,
+        text: '',
+        bigText: '',
+        type: '',
+        button: '',
+        action: ()=>{},
+        button1: '',
+        action1: ()=>{},
+    })
     
 
     const cartItems = useSelector((state) => state.cart.items);
@@ -18,21 +34,35 @@ const AddPayment = () => {
         dispatch(loadCart());
       }, [dispatch]);
 
-  const handleCheckout = () => {
-    // Dispatch action to add current cart items to history
-    dispatch(addToHistory(cartItems));
-  };
+      const handleCheckout = () => {
+        if (Array.isArray(cartItems) && cartItems.length > 0) {
+            const userDetails = {
+                isDelivery,
+                isPickup,
+                isMomoSameAsPhone,
+                momoNumber,
+                paymentMethod,
+                name,
+                phoneNumber
+            };
+            dispatch(addToHistory({ items: cartItems, userDetails }));
+        } else {
+            setAlert({...isAlert, status: true, text: "Product deleted!", type: 'error'})
+        }
+      };
 
   return (
     <div className='grotest w-full mx-auto px-[2rem] py-[1rem]'>
+        <Alert big={isAlert.bigText} button1={isAlert.button} action1={()=>isAlert.action()} isON={isAlert.status} type={isAlert.type} message={isAlert.text} setON={(val)=>setAlert({...isAlert, status: false, text: ''})}/>
         <h2 className='text-[1.1rem] font-semibold'>Product details</h2>
         <div className='w-full h-[500px] py-[0.5rem] overflow-auto'>
             <div className='w-[60%]'>
                 <div className='flex flex-col gap-[0.5rem] pb-[1rem]'>
                     <label className='text-[1rem] font-medium'>Name</label>
                     <input className='outline-none border-2 text-[0.9rem] px-[1rem] py-[0.5rem] rounded-md' type="text" 
-                        name="productName"
                         placeholder='Kwame  Dartey'
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </div>
                 <div className='flex flex-col gap-[0.5rem] pb-[1rem]'>
@@ -48,8 +78,9 @@ const AddPayment = () => {
 
                         </div>
                         <input className='flex-1 outline-none border-2 text-[0.9rem] px-[1rem] py-[0.5rem] rounded-md' type="text" 
-                            name="productName"
                             placeholder='+233 278 811 107'
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
                         />
                     </div>
                 </div>
@@ -57,40 +88,42 @@ const AddPayment = () => {
                     <div className='text-[1.1rem] font-semibold'>Select Payment method</div>
                     <div className='py-[0.5rem] flex justify-start items-center gap-[2rem]'>
                         <div className='flex justify-start items-center gap-[1rem]'>
-                            <input type="radio" name="method" className=" accent-[#0DD983] " />
+                            <input type="radio" className=" accent-[#0DD983] " 
+                                name="paymentMethod"
+                                value="momo"
+                                checked={paymentMethod === 'momo'}
+                                onChange={() => setPaymentMethod('momo')}
+                            />
                             <label htmlFor="momo">Momo</label>
                         </div>
                         <div className='flex justify-start items-center gap-[1rem]'>
-                            <input type="radio" name="method" className=" accent-[#0DD983] " />
+                            <input type="radio" className=" accent-[#0DD983] " 
+                                name="paymentMethod"
+                                value="card"
+                                checked={paymentMethod === 'card'}
+                                onChange={() => setPaymentMethod('card')}
+                            />
                             <label htmlFor="momo">Card</label>
                         </div>
                         <div className='flex justify-start items-center gap-[1rem]'>
-                            <input type="radio" name="method" className=" accent-[#0DD983] " />
+                            <input type="radio" className=" accent-[#0DD983] " 
+                                name="paymentMethod"
+                                value="cashOnDelivery"
+                                checked={paymentMethod === 'cashOnDelivery'}
+                                onChange={() => setPaymentMethod('cashOnDelivery')}
+                            />
                             <label htmlFor="momo">Cash on delivery</label>
                         </div>
                     </div>
                 </div>
                 <div className='pt-[0.5rem] flex justify-start items-center gap-[1rem]'>
-                    <input type="checkbox" className='accent-[#0DD983]' />
+                    <input type="checkbox" className='accent-[#0DD983]'
+                        checked={isMomoSameAsPhone}
+                        onChange={(e) => setIsMomoSameAsPhone(e.target.checked)}
+                     />
                     <label htmlFor="" className='text-[0.9rem]'>Is your Momo number the same as your phone number?</label>
                 </div>
-                <div className='pt-[1.4rem] flex flex-col gap-[0.5rem] pb-[1rem]'>
-                    <label className='text-[1rem] font-medium'>Phone number</label>
-                    <div className='h-[40px] bg-gray-300 flex justify-start items-center border-2 rounded-md'>
-                        <div className=' flex justify-start items-center gap-[0.5rem] '>
-                            <div className='w-[30px] h-full'>
-                                <img className='w-full h-full object-cover' src={ghana} alt="" />
-                            </div>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </div>
-                        <input className='flex-1 outline-none border-2 text-[0.9rem] px-[1rem] py-[0.5rem] rounded-md' type="text" 
-                            name="productName"
-                            placeholder='+233 278 811 107'
-                        />
-                    </div>
-                </div>
+                
             </div>
             <div className='py-[1rem]'>
                 <h2 className='text-[1.1rem] font-semibold'>Delivery Details</h2>

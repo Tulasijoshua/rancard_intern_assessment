@@ -1,14 +1,12 @@
-// historySlice.js
 import { createSlice } from '@reduxjs/toolkit';
 
-// Load history from local storage if available
-const loadHistoryFromStorage = () => {
-  const storedHistory = localStorage.getItem('history');
-  return storedHistory ? JSON.parse(storedHistory) : [];
+const initialState = {
+    history: []
 };
 
-const initialState = {
-  history: loadHistoryFromStorage(),
+const getRandomStatus = () => {
+    const statuses = ['pending', 'confirmed', 'canceled'];
+    return statuses[Math.floor(Math.random() * statuses.length)];
 };
 
 export const historySlice = createSlice({
@@ -16,19 +14,30 @@ export const historySlice = createSlice({
   initialState,
   reducers: {
     addToHistory: (state, action) => {
-      state.history.push(action.payload);
-      localStorage.setItem('history', JSON.stringify(state.history));
+        const { items, userDetails } = action.payload;
+
+        const itemsWithDetails = items.map(item => ({
+            ...item,
+            userDetails
+        }));
+
+        if (Array.isArray(state.history)) {
+            state.history.push(...itemsWithDetails);
+        } else {
+            state.history = [...itemsWithDetails];
+        }
+
+        localStorage.setItem('history', JSON.stringify(state.history));
     },
-    clearHistory: (state) => {
-      state.history = [];
-      localStorage.removeItem('history');
-    },
-    loadHistoryFromLocalStorage: (state) => {
-      state.history = loadHistoryFromStorage();
-    }
+    loadHistory: (state) => {
+        const storedItems = localStorage.getItem('history');
+        if (storedItems) {
+          state.items = JSON.parse(storedItems);
+        }
+      },
   },
 });
 
-export const { addToHistory, clearHistory, loadHistoryFromLocalStorage } = historySlice.actions;
+export const { addToHistory, loadHistory } = historySlice.actions;
 
 export default historySlice.reducer;

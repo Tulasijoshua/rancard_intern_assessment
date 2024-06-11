@@ -9,14 +9,20 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      const newItem = action.payload; 
+      const newItem = action.payload;
       const existingItemIndex = state.items.findIndex(item => item.product.id === newItem.product.id);
 
       if (existingItemIndex !== -1) {
         state.items[existingItemIndex].quantity += newItem.quantity;
+        // Recalculate the total price for all variants
+        const totalPrice = state.items[existingItemIndex].product.variants.reduce((acc, variant) => acc + variant.price, 0) * state.items[existingItemIndex].quantity;
+        state.items[existingItemIndex].totalPrice = totalPrice;
       } else {
-        state.items.push(newItem);
+        // Calculate total price by summing up the prices of all variants
+        const totalPrice = newItem.product.variants.reduce((acc, variant) => acc + variant.price, 0) * newItem.quantity;
+        state.items.push({ ...newItem, totalPrice });
       }
+
       localStorage.setItem('cartItems', JSON.stringify(state.items));
     },
     removeItem: (state, action) => {

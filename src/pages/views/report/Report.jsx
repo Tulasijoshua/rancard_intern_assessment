@@ -1,9 +1,22 @@
 import React from 'react'
 import { BarChart, Bar, Rectangle, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { chartData } from '../../../utils/products';
+import Button from '../../../common/Button';
 
 
 const Report = () => {
+    const exportToCSV = () => {
+        const csvData = chartData.map(row => Object.values(row).join(',')).join('\n');
+        const blob = new Blob([csvData], { type: 'text/csv' });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'data.csv';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+      };
   return (
     <section className='maxSection w-full lg:px-[2rem] px-[1rem] sm:py-[3rem] py-[1.5rem]'>
       <div className='w-full flex justify-between items-center gap-[1rem]'>
@@ -86,6 +99,7 @@ const Report = () => {
                 </BarChart>
             </ResponsiveContainer>
         </section>
+        <Button onClick={exportToCSV} title="Export file"/>
     </section>
   )
 }

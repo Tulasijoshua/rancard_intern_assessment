@@ -8,13 +8,26 @@ import { loadProducts } from '../../../store/productSlice'
 import { useDispatch, useSelector } from 'react-redux'
 import Empty from '../../../common/Empty'
 import { addItem } from '../../../store/cartSlice'
+import { Link } from 'react-router-dom'
+import Alert from '../../../common/Alert'
 
 const Home = () => {
     const [showCart, setShowCart] = useState(false)
     const [showProduct, setShowProduct] = useState(false)
     const [isBack, setIsBack] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products);
+    const [isAlert, setAlert] = useState({
+        status: false,
+        text: '',
+        bigText: '',
+        type: '',
+        button: '',
+        action: ()=>{},
+        button1: '',
+        action1: ()=>{},
+    })
 
     useEffect(() => {
         dispatch(loadProducts());
@@ -22,12 +35,21 @@ const Home = () => {
     console.log(products)
 
     const handleAddToCart = (product) => {
-        dispatch(addItem(product));
+        // if (!selectedProduct) {
+        //     setAlert({...isAlert, status: true, text: "Select a product!", type: 'error'})
+        // } else {
+            setSelectedProduct(product);
+            setShowCart(true);
+
+        // }
     };
+
 
   return (
     <section className='maxSection w-full lg:px-[2rem] px-[1rem] sm:py-[3rem] py-[1.5rem]'>
-        <Modal isOn={showCart} name="Add to Cart" onClose="Close" setIsBack={false} close={()=>setShowCart(false)} content={<AddToCart close={()=>{
+        <Alert big={isAlert.bigText} button1={isAlert.button} action1={()=>isAlert.action()} isON={isAlert.status} type={isAlert.type} message={isAlert.text} setON={(val)=>setAlert({...isAlert, status: false, text: ''})}/>
+
+        <Modal isOn={showCart} name="Add to Cart" onClose="Close" setIsBack={false} close={()=>setShowCart(false)} content={<AddToCart product={selectedProduct} close={()=>{
                 setShowCart(false)
             }} cancel={()=>setShowCart(false)}/>}
         />
@@ -39,8 +61,9 @@ const Home = () => {
       <div className='w-full flex sm:flex-row flex-col xs:justify-between justify-start sm:items-center items-start'>
         <h2 className='uncut text-left 2xl:text-[2rem] xl:text-[1.8rem] md:text-[1.6rem] text-[1.5rem] font-semibold'>Products</h2>
         <div className='grotest-medium sm:pt-[0.5rem] pt-[1rem] flex ss:flex-row flex-col ss:justify-end justify-start items-center gap-[1rem]'>
-            <button onClick={()=>{setShowProduct(true); setIsBack(true)}} className='xl:px-[1.8rem] xs:px-[1.5rem] px-[1rem] xl:py-[0.8rem] py-[0.5rem] md:text-[0.9rem] text-[0.8rem] text-[#0DD983] font-medium border border-[#0DD983] rounded-[2rem]'>Add Product</button>
+           
             <Button onClick={()=>setShowCart(true)} title="Add to Cart" />
+            <button onClick={()=>{setShowProduct(true); setIsBack(true)}} className='xl:px-[1.8rem] xs:px-[1.5rem] px-[1rem] xl:py-[0.8rem] py-[0.5rem] md:text-[0.9rem] text-[0.8rem] text-[#0DD983] font-medium border border-[#0DD983] rounded-[2rem]'>Add Product</button>
         </div>
       </div>
             {

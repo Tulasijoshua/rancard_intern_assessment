@@ -1,11 +1,14 @@
 import React from 'react'
 import { orderedProd, prodHistory } from '../../../utils/products'
+import { useSelector } from 'react-redux';
 
 const OrderPage = () => {
+    const historyItems = useSelector((state) => state?.history?.history);
+    console.log("Product history", historyItems);
   return (
     <section className='maxSection w-full lg:px-[2rem] px-[1rem] sm:py-[3rem] py-[1.5rem]'>
         <div className='w-full flex justify-between items-center gap-[1rem]'>
-            <h2 className='uncut text-left 2xl:text-[1.8rem] xl:text-[1.6rem] md:text-[1.5rem] text-[1.5rem] font-semibold'>Product History</h2>
+            <h2 className='uncut text-left 2xl:text-[1.8rem] xl:text-[1.6rem] md:text-[1.5rem] text-[1.5rem] font-semibold'>Orders</h2>
             <button className='px-[1rem] py-[0.4rem] flex justify-end items-center gap-[1rem] border-2 border-gray-300 rounded-md'>
                 <span className='font-medium'>Filter</span>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4">

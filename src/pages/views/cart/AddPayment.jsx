@@ -3,10 +3,21 @@ import Button from '../../../common/Button'
 import ghana from "../../../assets/countries/images.png";
 import ukFlag from "../../../assets/countries/uk.png";
 import usFlag from "../../../assets/countries/us.jpg";
+import { useSelector } from 'react-redux';
+import { addToHistory } from '../../../store/historySlice';
 
 const AddPayment = () => {
     const [isDelivery, setIsDelivery] = useState(false)
     const [isPickup, setIsPickup] = useState(false)
+
+    const cartItems = useSelector(state => state.cart.items);
+
+    const handleCheckout = () => {
+        dispatch(addToHistory(cartItems));
+        // Optionally, clear cart items after checkout
+        // dispatch(clearCart());
+      };
+
   return (
     <div className='grotest w-full mx-auto px-[2rem] py-[1rem]'>
         <h2 className='text-[1.1rem] font-semibold'>Product details</h2>
@@ -103,7 +114,7 @@ const AddPayment = () => {
         </div>
         <div className='w-full mt-[1.5rem] py-[1rem] flex justify-end items-center border-t-[1px] border-gray-400'>
             <div className='w-full pt-[0.5rem] pr-[2rem]'>
-                <button className='w-full xl:px-[1.8rem] xs:px-[1.5rem] px-[1rem] xl:py-[0.8rem] py-[0.5rem] md:text-[0.9rem] text-[0.8rem] text-white font-medium border bg-[#0DD983] rounded-[2rem]'>Continue to pay</button>
+                <button onClick={handleCheckout} className='w-full xl:px-[1.8rem] xs:px-[1.5rem] px-[1rem] xl:py-[0.8rem] py-[0.5rem] md:text-[0.9rem] text-[0.8rem] text-white font-medium border bg-[#0DD983] rounded-[2rem]'>Continue to pay</button>
             </div>
       </div>
     </div>

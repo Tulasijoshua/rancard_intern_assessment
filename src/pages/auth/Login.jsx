@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn, signOut } from '../../store/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -23,8 +23,8 @@ const Login = () => {
   return (
     <div className='maxContainer h-[100vh] flex flex-col justify-center '>
       <div className=' w-full max-h-[60rem] h-[100vh] flex justify-between items-center overflow-hidden'>
-        <section className='auth-img lg:flex-1 w-[40%] md:block hidden h-full flex flex-col justify-center items-start'>
-          <div className='care w-full p-[3rem] lg:text-[3rem] text-[2rem] text-[#0DD983] font-semibold '>
+        <section className='auth-img lg:flex-1 w-[40%] md:block hidden h-full '>
+          <div className='care w-full h-full flex flex-col justify-center items-start p-[3rem] lg:text-[3rem] text-[2rem] text-[#0DD983] font-semibold '>
             Syst
           </div>
         </section>
@@ -54,7 +54,7 @@ const Login = () => {
                 />
               </div>
               <button className='w-full xl:py-[0.7rem] md:py-[0.5rem] py-[0.5rem] px-[1rem] lg:text-[1rem] sm:text-[0.9rem] text-[1rem] text-[#16CB7F] font-medium bg-[#0DD9834F] rounded-[2rem]'>Log in</button>
-              {isAuthenticated ? <p>Sign in successful!</p> : <p>Sign in failed</p>}
+              <div>Don't have an account? <Link to="/register" >Register</Link> </div>
             </form>
           </div>
         </section>

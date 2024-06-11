@@ -10,14 +10,14 @@ import { v4 as uuidv4 } from 'uuid';
 const AddProduct = () => {
     const [profileImg, setProfileImg] = useState('')
     const dispatch = useDispatch();
-    const [variants, setVariants] = useState([{ id: 1, name: '', price: '', size: '' }]);
+    const [variants, setVariants] = useState([{ id: 1, name: '', price: 0, size: '' }]);
     const [state, setState] = useState({
         id: uuidv4(),
         image: "",
         productName: "",
         category: "",
         description: "",
-        variants: [{ id: 1, name: '', price: '', size: '' }],
+        variants: [{ id: 1, name: '', price: 0, size: '' }],
     });
 
     const fileChange = (e) => {
@@ -44,7 +44,7 @@ const AddProduct = () => {
     const addVariant = () => {
         setState((prevState) => ({
             ...prevState,
-            variants: [...prevState.variants, { id: prevState.variants.length + 1, name: '', price: '', size: '' }]
+            variants: [...prevState.variants, { id: prevState.variants.length + 1, name: '', price: 0, size: '' }]
         }));
     };
 
@@ -80,7 +80,7 @@ const AddProduct = () => {
             productName: "",
             category: "",
             description: "",
-            variants: [{ id: 1, name: '', price: '', size: '' }],
+            variants: [{ id: 1, name: '', price: 0, size: '' }],
         });
     };
 
@@ -88,7 +88,7 @@ const AddProduct = () => {
   return (
     <form onSubmit={handleProduct} className='grotest w-full mx-auto px-[2rem] py-[1rem]'>
       <h2 className='text-[1.1rem] font-semibold'>Product details</h2>
-      <div className='w-fit h-[500px] py-[0.5rem] overflow-auto'>
+      <div className='w-fit h-[73vh] py-[0.5rem] overflow-auto'>
         <div className='w-fit h-fit pb-[1rem]'>
             <small className='text-[1rem] font-medium'>Image</small>
             <div className='max-w-[300px] w-fit mt-[0.5rem] flex flex-col justify-center items-center relative px-3 py-2 border-2 border-dashed border-gray-200 rounded-lg '>
@@ -154,7 +154,7 @@ const AddProduct = () => {
                     </div>
                     <div className='flex flex-col gap-[0.5rem] pb-[1rem]'>
                         <label className='text-[0.9rem] font-medium'>Price</label>
-                        <input className='outline-none border-2 text-[0.8rem] px-[1rem] py-[0.4rem] rounded-md' type="text" 
+                        <input className='outline-none border-2 text-[0.8rem] px-[1rem] py-[0.4rem] rounded-md' type="number" 
                             name="price"
                             placeholder='Enter price'
                             value={variant.price}

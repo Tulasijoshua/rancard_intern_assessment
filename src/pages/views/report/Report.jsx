@@ -6,6 +6,7 @@ import { Chart as ChartJS } from "chart.js/auto";
 import { Doughnut, Bar } from 'react-chartjs-2';
 import { loadCart, selectTotalPrice } from '../../../store/cartSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { CSVLink } from 'react-csv';
 
 
 const Report = () => {
@@ -20,27 +21,13 @@ const Report = () => {
       console.log(cartItems)
       console.log(totalPrice)
 
-
-
-    const exportToCSV = () => {
-        const csvData = cartItems.map(row => Object.values(row.product.productName));
-        const blob = new Blob([csvData], { type: 'text/csv' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'data.csv';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-      };
-
       
   return (
     <section className='maxSection w-full lg:px-[2rem] px-[1rem] sm:py-[3rem] py-[1.5rem]'>
       <div className='w-full flex justify-between items-center gap-[1rem]'>
             <h2 className='uncut text-left 2xl:text-[1.8rem] xl:text-[1.6rem] md:text-[1.5rem] text-[1.5rem] font-semibold'>Report</h2>
-            <Button onClick={exportToCSV} title="Export file"/>
+            {/* <Button onClick={exportToCSV} title="Export file"/> */}
+            <CSVLink data={cartItems} className='xl:px-[1.8rem] xs:px-[1.5rem] px-[1rem] xl:py-[0.8rem] py-[0.5rem] md:text-[0.9rem] text-[0.8rem] text-white font-medium border bg-[#0DD983] rounded-[2rem]'>Export file</CSVLink>
         </div>
         <div className='uncut w-full pt-[1.5rem] pb-[3rem] sm:grid flex flex-col items-center lg:grid-cols-4 sm:grid-cols-2 gap-[2rem]'>
             <div className='w-full max-w-[300px] xl:h-[190px] sm:h-[170px] h-[190px] flex flex-col justify-between py-[1.7rem] xl:px-[1.5rem] px-[1rem] bg-white rounded-md'>

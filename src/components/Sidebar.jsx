@@ -9,7 +9,7 @@ const Sidebar = () => {
   return (
     <div className='uncut xl:w-[300px] lg:w-[250px] w-fit h-full pb-[4.5rem] flex flex-col justify-between lg:px-0 px-[0.5rem] bg-white'>
       <div className='xl:w-[80%] w-[90%] mx-auto py-[3rem] text-[#8F8F8F] flex flex-col lg:items-start items-center gap-[1rem]'>
-        <NavLink to="/" className='w-full py-[0.6rem] px-[1rem] flex justify-start items-center gap-[1rem] rounded-lg cursor-pointer'>
+        <NavLink to="/" className='w-full py-[0.6rem] px-[1rem] flex justify-start items-center lg:gap-[1rem] rounded-lg cursor-pointer'>
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5 font-bold">
                     <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
@@ -47,7 +47,7 @@ const Sidebar = () => {
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
             <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
         </svg>
-        <button className='text-[1rem] font-semibold'>Logout</button>
+        <button className='lg:block hidden text-[1rem] font-semibold'>Logout</button>
       </div>
     </div>
   )

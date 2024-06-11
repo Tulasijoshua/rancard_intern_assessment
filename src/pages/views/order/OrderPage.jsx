@@ -9,7 +9,6 @@ const OrderPage = () => {
   const historyItems = useSelector(state => state.history.history);
 
     useEffect(() => {
-    // Load history items when the component mounts
     dispatch(loadHistory());
   }, [dispatch]);
 
